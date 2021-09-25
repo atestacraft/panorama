@@ -25,4 +25,5 @@ const viewer = new PANOLENS.Viewer({
 })
 
 viewer.add(panorama)
-console.log(viewer.options)
+console.log(viewer.camera)
+viewer.camera.up.y = 0 
