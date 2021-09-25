@@ -14,11 +14,15 @@ const panorama = new PANOLENS.CubePanorama([
   path + 'panorama_2' + format,
 ])
 
-const camera = new PANOLENS.CameraPanorama()
 const viewer = new PANOLENS.Viewer({
+  horizontalView: true,
   controlBar: false,
-  initialLookAt: new THREE.Vector3(-10, 5, 5)
+  autoRotate: true,
+  cameraFov: 100,
+  autoRotateSpeed: 0.5,
+  autoRotateActivationDuration: 1,
+  initialLookAt: new THREE.Vector3(-1, 2, 2)
 })
 
-viewer.dispose()
 viewer.add(panorama)
+console.log(viewer.options)
