@@ -14,11 +14,45 @@
       height: 100%;
       overflow: hidden;
       background-color: #000;
+      background-repeat: repeat;
+      background-size: 32px;
+      transition: all 1s;
+    }
+
+    .panolens-container {
+      animation-delay: .5s;
+      animation-duration: 1s;
+      animation-fill-mode: both;
+      animation-name: fadeIn;
+      background-color: transparent !important;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .progress {
+      top: 0;
+      width: 0;
+      height: 5px;
+      position: fixed;
+      background: #FFF;
+      transition: opacity 0.5s ease;
+    }
+
+    .progress.finish {
+      opacity: 0;
     }
   </style>
 </head>
 
-<body>
+<body style="filter: brightness(0.5);">
   <script src="https://pchen66.github.io/js/three/three.min.js"></script>
   <script src="https://pchen66.github.io/js/panolens/panolens.min.js"></script>
   <script src="main.js"></script>
