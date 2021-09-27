@@ -17,7 +17,7 @@ class Panorama {
     // px, nx, py, ny, pz, nz
     this.panorama = new PANOLENS.CubePanorama(cube)
     this.viewer = new PANOLENS.Viewer(options)
-    this.viewer.control.enabled = false
+    this.viewer.disableControl()
 
     this.panorama.addEventListener('progress', this.onProgress.bind(this))
     this.panorama.addEventListener('enter', this.onEnter.bind(this))
