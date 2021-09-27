@@ -17,6 +17,7 @@ class Panorama {
     // px, nx, py, ny, pz, nz
     this.panorama = new PANOLENS.CubePanorama(cube)
     this.viewer = new PANOLENS.Viewer(options)
+    this.viewer.control.enabled = false
 
     this.panorama.addEventListener('progress', this.onProgress.bind(this))
     this.panorama.addEventListener('enter', this.onEnter.bind(this))
@@ -82,13 +83,11 @@ const panorama = new Panorama({
     path + 'panorama_2' + format
   ],
   options: {
-    horizontalView: true,
     controlBar: false,
     autoRotate: true,
     cameraFov: 100,
-    autoRotateSpeed: 0.5,
-    autoRotateActivationDuration: 1,
-    initialLookAt: new THREE.Vector3(-1, 2, 2)
+    autoRotateSpeed: 0.2,
+    initialLookAt: new THREE.Vector3(-2, 0, 2)
   }
 })
 
