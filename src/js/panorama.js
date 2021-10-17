@@ -35,7 +35,6 @@ class Panorama {
     document.body.appendChild(this.progress)
   }
 
-
   onEnter(event) {
     this.progress.style.width = 0
     this.progress.classList.remove('finish')

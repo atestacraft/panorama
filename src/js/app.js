@@ -20,7 +20,7 @@ const panorama = new Panorama({
     path + 'panorama_2' + format
   ],
   options: {
-    controlBar: false,
+    controlBar: true,
     autoRotate: true,
     cameraFov: 85,
     autoRotateSpeed: 0.3,
