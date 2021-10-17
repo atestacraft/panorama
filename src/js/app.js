@@ -4,7 +4,7 @@ const url = new URL(location.href)
 url.searchParams.set('version', version)
 history.pushState(null, '', url)
 
-const path = `images/${version}/`
+const path = `src/images/${version}/`
 const format = '.png'
 
 // initial background
