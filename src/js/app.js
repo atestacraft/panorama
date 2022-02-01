@@ -8,6 +8,11 @@ class App {
     '1.18'
   ]
 
+  constructor() {
+    this.params = new URLSearchParams(window.location.search)
+    this.interval = this.params.get('interval') || 60
+  }
+
   init() {
     if (this.panorama) {
       const currentVersionIdx = Object.values(this.versions)
@@ -19,8 +24,7 @@ class App {
         this.selectedVersion = this.versions[currentVersionIdx - 1]
       }
     } else {
-      const params = new URLSearchParams(window.location.search)
-      const query = params.get('version')
+      const query = this.params.get('version')
       const version = this.versions.includes(query) ? query : this.versions[this.versions.length - 1]
       this.url = new URL(location.href)
       this.selectedVersion = version
@@ -67,7 +71,7 @@ class App {
 
     this.init()
     this.render()
-    setTimeout(() => this.run(), 1000 * 10)
+    setTimeout(() => this.run(), 1000 * this.interval)
   }
 }
 
