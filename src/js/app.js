@@ -10,7 +10,7 @@ class App {
 
   constructor() {
     this.params = new URLSearchParams(window.location.search)
-    this.interval = this.params.get('interval') || 60
+    this.interval = this.params.get('interval') || 120
   }
 
   init() {
