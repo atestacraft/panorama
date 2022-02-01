@@ -1,6 +1,9 @@
-const query = new URLSearchParams(window.location.search)
-const version = query.get('version') || '1.18'
+const params = new URLSearchParams(window.location.search)
+const versions = ['1.13', '1.14', '1.15', '1.16', '1.17', '1.18']
+const query = params.get('version')
+const version = versions.includes(query) ? query : versions[versions.length - 1]
 const url = new URL(location.href)
+
 url.searchParams.set('version', version)
 history.pushState(null, '', url)
 
