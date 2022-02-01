@@ -1,35 +1,75 @@
-const params = new URLSearchParams(window.location.search)
-const versions = ['1.13', '1.14', '1.15', '1.16', '1.17', '1.18']
-const query = params.get('version')
-const version = versions.includes(query) ? query : versions[versions.length - 1]
-const url = new URL(location.href)
+class App {
+  versions = [
+    '1.13',
+    '1.14',
+    '1.15',
+    '1.16',
+    '1.17',
+    '1.18'
+  ]
 
-url.searchParams.set('version', version)
-history.pushState(null, '', url)
+  init() {
+    if (this.panorama) {
+      const currentVersionIdx = Object.values(this.versions)
+        .findIndex((version) => this.selectedVersion === version)
 
-const path = `src/images/${version}/`
-const format = '.png'
+      if (currentVersionIdx === 0) {
+        this.selectedVersion = this.versions[this.versions.length - 1]
+      } else {
+        this.selectedVersion = this.versions[currentVersionIdx - 1]
+      }
+    } else {
+      const params = new URLSearchParams(window.location.search)
+      const query = params.get('version')
+      const version = this.versions.includes(query) ? query : this.versions[this.versions.length - 1]
+      this.url = new URL(location.href)
+      this.selectedVersion = version
+    }
 
-// initial background
-document.body.style.backgroundImage = `url(${path}background${format})`
+    this.url.searchParams.set('version', this.selectedVersion)
+    history.pushState(null, '', this.url)
 
-const panorama = new Panorama({
-  cube: [
-    path + 'panorama_1' + format,
-    path + 'panorama_3' + format,
-    path + 'panorama_4' + format,
-    path + 'panorama_5' + format,
-    path + 'panorama_0' + format,
-    path + 'panorama_2' + format
-  ],
-  options: {
-    controlBar: true,
-    autoRotate: true,
-    cameraFov: 85,
-    autoRotateSpeed: 0.3,
-    autoRotateActivationDuration: 0,
-    initialLookAt: new THREE.Vector3(0, 0, 2)
+    this.path = `src/images/${this.selectedVersion}/`
+    this.ext = '.png'
+
+    if (!this.panorama) {
+      document.body.style.backgroundImage = `url(${this.path}background${this.ext})`
+    }
   }
-})
 
-panorama.start()
+  render() {
+    this.panorama = new Panorama({
+      cube: [
+        this.path + 'panorama_1' + this.ext,
+        this.path + 'panorama_3' + this.ext,
+        this.path + 'panorama_4' + this.ext,
+        this.path + 'panorama_5' + this.ext,
+        this.path + 'panorama_0' + this.ext,
+        this.path + 'panorama_2' + this.ext
+      ],
+      options: {
+        controlBar: false,
+        autoRotate: true,
+        cameraFov: 85,
+        autoRotateSpeed: 0.3,
+        autoRotateActivationDuration: 0,
+        initialLookAt: new THREE.Vector3(0, 0, 2)
+      }
+    })
+
+    this.panorama.start()
+  }
+
+  run() {
+    if (this.panorama) {
+      this.panorama.destroy()
+    }
+
+    this.init()
+    this.render()
+    setTimeout(() => this.run(), 1000 * 10)
+  }
+}
+
+const app = new App()
+app.run()

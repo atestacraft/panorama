@@ -29,6 +29,16 @@ class Panorama {
     this.viewer.add(this.panorama)
   }
 
+  destroy() {
+    setTimeout(() => {
+      this.progress.remove()
+      this.panorama.dispose()
+      this.viewer.remove(this.panorama)
+      this.panorama.container.remove()
+      this.panorama = null
+    }, 1000)
+  }
+
   renderProgress() {
     this.progress = document.createElement('div')
     this.progress.classList.add('progress')
