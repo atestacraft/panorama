@@ -1,4 +1,4 @@
-class Panorama {
+export class Panorama {
   constructor({ cube, options }) {
     // 1,  3,  4,  5,  0,  2
     // px, nx, py, ny, pz, nz

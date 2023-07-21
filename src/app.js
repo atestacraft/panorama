@@ -1,13 +1,8 @@
+import { Panorama } from './panorama.js'
+
 class App {
   textures = {}
-  versions = [
-    '1.13',
-    '1.14',
-    '1.15',
-    '1.16',
-    '1.17',
-    '1.18'
-  ]
+  versions = ['1.13', '1.14', '1.15', '1.16', '1.17', '1.18']
 
   constructor() {
     this.params = new URLSearchParams(window.location.search)
@@ -41,20 +36,18 @@ class App {
     const defaultInterval = 15
     const interval = this.params.get('interval')
 
-    return interval === null ?
-      defaultInterval :
-      isNaN(interval) ?
-        defaultInterval :
-        Number(interval)
+    return interval === null
+      ? defaultInterval
+      : isNaN(interval)
+      ? defaultInterval
+      : Number(interval)
   }
 
   getControl() {
     const defaultControl = false
     const control = this.params.get('control')
 
-    return control === null ?
-      defaultControl :
-      control == 'true'
+    return control === null ? defaultControl : control == 'true'
   }
 
   loadTextures(version) {
@@ -83,8 +76,9 @@ class App {
 
   initOptions() {
     if (this.panorama) {
-      const currentVersionIdx = Object.values(this.versions)
-        .findIndex((version) => this.selectedVersion === version)
+      const currentVersionIdx = Object.values(this.versions).findIndex(
+        (version) => this.selectedVersion === version
+      )
 
       if (currentVersionIdx === 0) {
         this.selectedVersion = this.versions[this.versions.length - 1]
@@ -93,9 +87,9 @@ class App {
       }
     } else {
       const query = this.params.get('version')
-      const version = this.versions.includes(query) ?
-        query :
-        this.versions[this.versions.length - 1]
+      const version = this.versions.includes(query)
+        ? query
+        : this.versions[this.versions.length - 1]
 
       this.url = new URL(location.href)
       this.selectedVersion = version
@@ -106,7 +100,7 @@ class App {
     this.url.searchParams.set('control', this.control)
     history.pushState(null, '', this.url)
 
-    this.path = `src/images/${this.selectedVersion}/`
+    this.path = `images/${this.selectedVersion}/`
     this.ext = '.png'
   }
 
