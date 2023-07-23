@@ -14,7 +14,7 @@ const versions = [
 
 const searchParams = new URLSearchParams(location.search)
 const rotateSpeed = Number(searchParams.get('speed') ?? '0.3')
-const version = searchParams.get('version') ?? '1.17'
+const version = searchParams.get('version') ?? versions.at(-1)!
 
 if (!versions.includes(version)) {
   location.href = '/'
