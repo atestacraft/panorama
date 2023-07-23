@@ -13,6 +13,7 @@ const versions = [
 ]
 
 const searchParams = new URLSearchParams(location.search)
+const rotateSpeed = Number(searchParams.get('speed') ?? '0.3')
 const version = searchParams.get('version') ?? '1.17'
 
 if (!versions.includes(version)) {
@@ -42,7 +43,6 @@ const camera = new THREE.PerspectiveCamera(
   1000
 )
 camera.position.set(0.2, 0.2, -1)
-
 const scene = new THREE.Scene()
 scene.add(camera)
 
@@ -57,12 +57,15 @@ const container = document.querySelector('.container')!
 container.appendChild(renderer.domElement)
 
 const controls = new OrbitControls(camera, renderer.domElement)
-controls.enableRotate = false
+controls.enablePan = false
 controls.enableZoom = false
+controls.autoRotate = true
+controls.enableDamping = true
+controls.autoRotateSpeed = rotateSpeed
 
 function render(): void {
   requestAnimationFrame(render)
-  camera.rotation.y += 0.0004
+  controls.update()
   renderer.render(scene, camera)
 }
 
