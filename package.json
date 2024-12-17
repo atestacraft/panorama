@@ -3,7 +3,11 @@
   "type": "module",
   "version": "0.0.0",
   "private": true,
-  "types": "module",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9.12"
+  },
   "scripts": {
     "dev": "turbo dev",
     "build": "pnpm lint && turbo build",
