@@ -21,14 +21,54 @@ pnpm add @atestacraft/panorama
 
 ## Usage
 
-Basic usage example:
-
 ```ts
 import { Panorama } from '@atestacraft/panorama'
 
 const container = document.querySelector('.panorama')
 const panorama = new Panorama(container)
 panorama.init('path/to/panorama')
+```
+
+## Example for Vue
+
+```vue
+<template>
+  <div ref="panoramaRef" class="panorama" />
+</template>
+
+<script setup lang="ts">
+import { Panorama } from '@atestacraft/panorama-core'
+import { onMounted, onUnmounted, shallowRef, useTemplateRef } from 'vue'
+
+const panorama = shallowRef<Panorama>()
+const panoramaRef = useTemplateRef('panoramaRef')
+
+onMounted(() => {
+  if (!panoramaRef.value) return
+  panorama.value = new Panorama(panoramaRef.value)
+  panorama.value.init('path/to/panorama')
+})
+
+onUnmounted(() => {
+  if (!panorama.value) return
+  panorama.value.dispose()
+})
+</script>
+
+<style scoped>
+.panorama > canvas {
+  animation: fadeIn 2s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>
 ```
 
 ## API
