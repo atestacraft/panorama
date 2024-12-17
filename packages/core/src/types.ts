@@ -23,10 +23,3 @@ export interface PanoramaOptions {
    */
   cameraFov?: number
 }
-
-/**
- * Path to panorama images, includes files `panorama_0` to `panorama_5` (6 images).
- * @see https://minecraft.wiki/w/Panorama
- * @example 'images/panorama'
- */
-export type PanoramaImagesPath = string
