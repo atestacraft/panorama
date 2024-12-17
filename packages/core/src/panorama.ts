@@ -10,7 +10,7 @@ import type { PanoramaOptions } from './types.js'
 const DEFAULT_OPTIONS: Required<PanoramaOptions> = {
   rotateSpeed: 0.3,
   enablePan: false,
-  enableRotate: false,
+  enableRotate: true,
   cameraFov: 100,
 }
 

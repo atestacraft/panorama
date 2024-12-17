@@ -7,7 +7,7 @@ export interface PanoramaOptions {
 
   /**
    * Enable automatic rotation.
-   * @default false
+   * @default true
    */
   enableRotate?: boolean
 

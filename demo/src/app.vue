@@ -48,10 +48,7 @@ const panorama = shallowRef<Panorama>()
 
 onMounted(() => {
   if (!panoramaRef.value) return
-  panorama.value = new Panorama(panoramaRef.value, {
-    enablePan: true,
-    enableRotate: true,
-  })
+  panorama.value = new Panorama(panoramaRef.value)
   panorama.value.init(`images/${currentVersion.value}`)
 })
 
