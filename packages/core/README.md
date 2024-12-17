@@ -100,13 +100,6 @@ Creates a panorama instance.
 | `updateOptions(options: PanoramaOptions)` | Updates the panorama options after initialization. This method applies changes immediately if the panorama is already initialized, otherwise, it applies the options when `init()` is called. |
 | `cameraPosition(x: number, y: number, z: number)` | Sets the position of the camera in 3D space. Takes three arguments: `x`, `y`, and `z` to specify the camera's coordinates. |
 
-### Internal Methods
-
-| Method | Description |
-|-|-|
-| `render()` | The main render loop for the panorama. This method updates the scene and re-renders it for each animation frame. It is called automatically once the panorama is initialized. |
-| `onWindowResize()`| Handles window resizing events to adjust the camera aspect ratio and renderer size. |
-
 ## Example
 
 ```ts
