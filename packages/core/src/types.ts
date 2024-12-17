@@ -22,18 +22,6 @@ export interface PanoramaOptions {
    * @default 100
    */
   cameraFov?: number
-
-  /**
-   * Camera near clipping plane.
-   * @default 0.1
-   */
-  cameraNear?: number
-
-  /**
-   * Camera far clipping plane.
-   * @default 1000
-   */
-  cameraFar?: number
 }
 
 /**

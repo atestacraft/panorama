@@ -12,8 +12,6 @@ const DEFAULT_OPTIONS: Required<PanoramaOptions> = {
   enablePan: false,
   enableRotate: false,
   cameraFov: 100,
-  cameraNear: 0.1,
-  cameraFar: 1000,
 }
 
 export class Panorama {
@@ -28,11 +26,11 @@ export class Panorama {
     private readonly container: HTMLElement,
     options: PanoramaOptions,
   ) {
-    this.setOptions({ ...DEFAULT_OPTIONS, ...options })
+    this.updateOptions({ ...DEFAULT_OPTIONS, ...options })
   }
 
-  init(imagePath: PanoramaImagesPath): void {
-    if (this.raf) return
+  init(imagePath: PanoramaImagesPath, fileExt = 'png'): void {
+    if (this.raf !== null) return
 
     const images = [
       'panorama_1',
@@ -41,13 +39,12 @@ export class Panorama {
       'panorama_5',
       'panorama_0',
       'panorama_2',
-    ].map((fileName) => `${imagePath.replace(/\/$/, '')}/${fileName}.png`)
+    ].map((fileName) => `${imagePath.replace(/\/$/, '')}/${fileName}.${fileExt}`)
 
     this.camera = new PerspectiveCamera(
       this.options.cameraFov,
       window.innerWidth / window.innerHeight,
-      this.options.cameraNear,
-      this.options.cameraFar,
+      0.1,
     )
     this.cameraPosition(0.2, 0.2, -1)
 
@@ -66,33 +63,35 @@ export class Panorama {
     this.container.appendChild(this.renderer.domElement)
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-    this.controls.enabled = this.options.enablePan
     this.controls.enablePan = false
     this.controls.enableZoom = false
     this.controls.enableDamping = true
-    this.controls.autoRotate = this.options.enableRotate
-    this.controls.autoRotateSpeed = this.options.rotateSpeed
 
     this.render = this.render.bind(this)
     this.onWindowResize = this.onWindowResize.bind(this)
 
     window.addEventListener('resize', this.onWindowResize)
     this.render()
+    this.updateOptions()
   }
 
-  setOptions(options: Partial<PanoramaOptions>) {
-    this.options = { ...this.options, ...options }
+  updateOptions(options?: Partial<PanoramaOptions>) {
+    if (options) {
+      this.options = { ...this.options, ...options }
+    }
 
-    if (this.camera) {
+    if (this.raf !== null) {
       const {
         cameraFov,
-        cameraNear,
-        cameraFar,
+        enablePan,
+        enableRotate,
+        rotateSpeed,
       } = this.options
 
       this.camera.fov = cameraFov
-      this.camera.near = cameraNear
-      this.camera.far = cameraFar
+      this.controls.enabled = enablePan
+      this.controls.autoRotate = enableRotate
+      this.controls.autoRotateSpeed = rotateSpeed
     }
   }
 
@@ -101,7 +100,7 @@ export class Panorama {
   }
 
   dispose() {
-    if (!this.raf) return
+    if (this.raf === null) return
     window.removeEventListener('resize', this.onWindowResize)
     cancelAnimationFrame(this.raf)
     this.raf = null

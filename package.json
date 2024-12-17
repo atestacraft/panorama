@@ -9,7 +9,7 @@
     "pnpm": ">=9.12"
   },
   "scripts": {
-    "dev": "turbo dev --filter=./demo",
+    "dev": "turbo dev",
     "build": "pnpm lint && turbo build",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
