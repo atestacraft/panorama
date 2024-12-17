@@ -21,6 +21,11 @@ pnpm add @atestacraft/panorama
 
 ## Usage
 
+The panorama effect requires 6 images to function correctly, named `panorama_0` through `panorama_5` (e.g., `panorama_0.png`, `panorama_1.png`, etc.).
+These images can be found in the panorama images of [this directory](./demo/public/images/), or you can use your own images with the same file names.
+
+To use the images from this repository, you can clone or download them and place them in your project folder (e.g., `images/`).
+
 ```ts
 import { Panorama } from '@atestacraft/panorama'
 
