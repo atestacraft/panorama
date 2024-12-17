@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@atestacraft/panorama-core": "workspace:*",
+    "@atestacraft/panorama": "workspace:*",
     "vue": "3.5.13"
   }
 }

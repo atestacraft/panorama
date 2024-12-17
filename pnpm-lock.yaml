@@ -41,7 +41,7 @@ importers:
 
   demo:
     dependencies:
-      '@atestacraft/panorama-core':
+      '@atestacraft/panorama':
         specifier: workspace:*
         version: link:../packages/core
       vue:

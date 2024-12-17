@@ -37,7 +37,7 @@ panorama.init('path/to/panorama')
 </template>
 
 <script setup lang="ts">
-import { Panorama } from '@atestacraft/panorama-core'
+import { Panorama } from '@atestacraft/panorama'
 import { onMounted, onUnmounted, shallowRef, useTemplateRef } from 'vue'
 
 const panorama = shallowRef<Panorama>()
