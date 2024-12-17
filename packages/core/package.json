@@ -1,0 +1,25 @@
+{
+  "name": "@atestacraft/panorama",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "three": "0.154.0"
+  },
+  "devDependencies": {
+    "@types/three": "0.154.0"
+  }
+}

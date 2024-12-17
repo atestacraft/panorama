@@ -1,21 +1,29 @@
 {
-  "name": "panorama",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@panorama/workspace",
   "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9.12"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "format": "prettier --write '**/*.{js,ts,tsx,json}'"
+    "dev": "turbo dev",
+    "build": "pnpm lint && turbo build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
-    "@crashmax/prettier-config": "4.1.0",
-    "@types/three": "0.154.0",
-    "typescript": "5.1.6",
-    "vite": "4.4.6"
-  },
-  "dependencies": {
-    "three": "0.154.0"
+    "@antfu/eslint-config": "3.9.2",
+    "@tsconfig/node20": "20.1.4",
+    "@types/node": "20.14.10",
+    "@vitejs/plugin-vue": "5.2.1",
+    "@vue/tsconfig": "0.7.0",
+    "turbo": "2.3.3",
+    "typescript": "5.6.3",
+    "vite": "5.4.11",
+    "vite-plugin-dts": "4.3.0",
+    "vue-tsc": "2.1.10"
   }
 }
