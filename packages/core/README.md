@@ -100,19 +100,6 @@ Creates a panorama instance.
 | `updateOptions(options: PanoramaOptions)` | Updates the panorama options after initialization. This method applies changes immediately if the panorama is already initialized, otherwise, it applies the options when `init()` is called. |
 | `cameraPosition(x: number, y: number, z: number)` | Sets the position of the camera in 3D space. Takes three arguments: `x`, `y`, and `z` to specify the camera's coordinates. |
 
-## Example
-
-```ts
-const container = document.querySelector('.panorama')
-const panorama = new Panorama(container, {
-  enableRotate: true,
-  rotateSpeed: 0.5,
-  cameraFov: 90
-})
-
-panorama.init('path/to/panorama')
-```
-
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
