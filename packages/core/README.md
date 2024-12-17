@@ -3,7 +3,7 @@
 > A library for creating a panoramic 3D effect on web pages, similar to the effect in the main menu of Minecraft.
 
 ## Demo
-You can view a live demo of the panorama effect [here](https://panorama.atestacraft.ru).
+You can view a live demo of the panorama effect [here](https://atestacraft.github.io/panorama/).
 
 ## Installation
 
