@@ -14,7 +14,7 @@ const DEFAULT_OPTIONS: Required<PanoramaOptions> = {
   cameraFov: 100,
 }
 
-export class Panorama {
+export class Panorama extends EventTarget {
   /** @internal */
   private raf: ReturnType<typeof requestAnimationFrame> | null = null
 
@@ -40,6 +40,7 @@ export class Panorama {
     container: HTMLElement,
     options: PanoramaOptions = {},
   ) {
+    super()
     this.container = container
     this.updateOptions({ ...DEFAULT_OPTIONS, ...options })
   }
@@ -84,7 +85,8 @@ export class Panorama {
     this.scene.add(this.camera)
 
     const textureLoader = new CubeTextureLoader()
-    textureLoader.load(images, (textureCube) => {
+    textureLoader.load(images, async (textureCube) => {
+      this.dispatchEvent(new Event('load'))
       this.scene.background = textureCube
     })
 

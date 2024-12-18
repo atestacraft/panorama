@@ -1,6 +1,14 @@
 <template>
-  <div ref="panoramaRef" class="panorama" />
-  <select v-model="currentVersion" class="version">
+  <div
+    v-show="isShow"
+    ref="panoramaRef"
+    class="panorama"
+  />
+  <select
+    v-model="currentVersion"
+    class="version"
+    :disabled="!isShow"
+  >
     <option
       v-for="version of versions"
       :key="version"
@@ -43,12 +51,14 @@ const versions = [
   'halloween22',
 ]
 
+const isShow = ref(false)
 const panoramaRef = useTemplateRef('panoramaRef')
 const panorama = shallowRef<Panorama>()
 
 onMounted(() => {
   if (!panoramaRef.value) return
   panorama.value = new Panorama(panoramaRef.value)
+  panorama.value.addEventListener('load', () => isShow.value = true)
   panorama.value.init(`images/${currentVersion.value}`)
 })
 
@@ -59,6 +69,7 @@ onUnmounted(() => {
 
 watch(currentVersion, (version) => {
   if (!panorama.value) return
+  isShow.value = false
   panorama.value.dispose()
   panorama.value.init(`images/${version}`)
 })

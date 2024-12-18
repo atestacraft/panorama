@@ -38,7 +38,7 @@ panorama.init('path/to/panorama')
 
 ```vue
 <template>
-  <div ref="panoramaRef" class="panorama" />
+  <div ref="panoramaRef" />
 </template>
 
 <script setup lang="ts">
@@ -59,21 +59,6 @@ onUnmounted(() => {
   panorama.value.dispose()
 })
 </script>
-
-<style scoped>
-.panorama > canvas {
-  animation: fadeIn 2s;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-</style>
 ```
 
 ## API
@@ -104,6 +89,12 @@ Creates a panorama instance.
 | `dispose()` | Removes the panorama from the DOM, stops the render loop, and cleans up event listeners and resources. |
 | `updateOptions(options: PanoramaOptions)` | Updates the panorama options after initialization. This method applies changes immediately if the panorama is already initialized, otherwise, it applies the options when `init()` is called. |
 | `cameraPosition(x: number, y: number, z: number)` | Sets the position of the camera in 3D space. Takes three arguments: `x`, `y`, and `z` to specify the camera's coordinates. |
+
+### Events
+
+| Event            | Description                                           |
+|------------------|------------------------------------------------------|
+| `load`           | Triggered after the panorama scene is loaded.        |
 
 ## License
 
