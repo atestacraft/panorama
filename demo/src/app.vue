@@ -83,6 +83,7 @@ watch(currentVersion, (version) => {
 
 body {
   background-color: #000;
+  overflow: hidden;
 }
 
 .panorama > canvas {
