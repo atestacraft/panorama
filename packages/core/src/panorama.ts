@@ -36,6 +36,9 @@ export class Panorama extends EventTarget {
   /** @internal */
   private options: Required<PanoramaOptions>
 
+  /** @internal */
+  private resizeObserver: ResizeObserver | null = null
+
   constructor(
     container: HTMLElement,
     options: PanoramaOptions = {},
@@ -102,9 +105,11 @@ export class Panorama extends EventTarget {
     this.controls.enableDamping = true
 
     this.render = this.render.bind(this)
-    this.onWindowResize = this.onWindowResize.bind(this)
+    this.handleResize = this.handleResize.bind(this)
 
-    window.addEventListener('resize', this.onWindowResize)
+    this.resizeObserver = new ResizeObserver(this.handleResize)
+    this.resizeObserver.observe(this.container)
+
     this.render()
     this.updateOptions(options)
   }
@@ -117,10 +122,14 @@ export class Panorama extends EventTarget {
    */
   dispose() {
     if (this.raf === null) return
-    window.removeEventListener('resize', this.onWindowResize)
     cancelAnimationFrame(this.raf)
     this.raf = null
     this.renderer.domElement.remove()
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect()
+      this.resizeObserver = null
+    }
   }
 
   /**
@@ -146,6 +155,7 @@ export class Panorama extends EventTarget {
       this.controls.enabled = enablePan
       this.controls.autoRotate = enableRotate
       this.controls.autoRotateSpeed = rotateSpeed
+      this.camera.updateProjectionMatrix()
     }
   }
 
@@ -168,9 +178,11 @@ export class Panorama extends EventTarget {
   }
 
   /** @internal */
-  private onWindowResize(): void {
-    this.camera.aspect = window.innerWidth / window.innerHeight
+  private handleResize(): void {
+    const width = this.container.clientWidth
+    const height = this.container.clientHeight
+    this.camera.aspect = width / height
     this.camera.updateProjectionMatrix()
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.renderer.setSize(width, height, false)
   }
 }

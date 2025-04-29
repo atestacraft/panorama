@@ -10,9 +10,8 @@
   },
   "scripts": {
     "dev": "turbo dev",
-    "build": "pnpm lint && turbo build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "build": "turbo build",
+    "lint": "eslint . --fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "3.9.2",
