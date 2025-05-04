@@ -36,9 +36,6 @@ export class Panorama extends EventTarget {
   /** @internal */
   private options: Required<PanoramaOptions>
 
-  /** @internal */
-  private resizeObserver: ResizeObserver | null = null
-
   constructor(
     container: HTMLElement,
     options: PanoramaOptions = {},
@@ -107,8 +104,8 @@ export class Panorama extends EventTarget {
     this.render = this.render.bind(this)
     this.handleResize = this.handleResize.bind(this)
 
-    this.resizeObserver = new ResizeObserver(this.handleResize)
-    this.resizeObserver.observe(this.container)
+    window.addEventListener('resize', this.handleResize)
+    this.handleResize()
 
     this.render()
     this.updateOptions(options)
@@ -125,11 +122,7 @@ export class Panorama extends EventTarget {
     cancelAnimationFrame(this.raf)
     this.raf = null
     this.renderer.domElement.remove()
-
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect()
-      this.resizeObserver = null
-    }
+    window.removeEventListener('resize', this.handleResize)
   }
 
   /**
